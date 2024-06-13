@@ -1,12 +1,23 @@
 = 42 Orthodox Canonical Class Form
 
-A shell script to create classes in the orthodox cannonical class form for the cpp projects in 42 School
+A shell script to create classes in the orthodox cannonical class form for the cpp projects at 42 School
 
 == Installation
 .Clone the repository
 [source, sh]
 ....
 git clone https://github.com/witemirlo/42-Orthodox-Canonical-Class-Form.git $HOME/.orthodox-canonical-class-form
+....
+
+.Set permissions
+[source, sh]
+....
+cd $HOME/.orthodox-canonical-class-form
+....
+
+[source, sh]
+....
+chmod +x class
 ....
 
 .Bash
@@ -19,6 +30,12 @@ echo "export PATH=$PATH:$HOME/.orthodox-canonical-class-form" >> .bashrc
 [source, sh]
 ....
 echo "export PATH=$PATH:$HOME/.orthodox-canonical-class-form" >> .zshrc
+....
+
+.Fish
+[source, sh]
+....
+fish_add_path $HOME/.orthodox-canonical-class-form
 ....
 
 == Usage
