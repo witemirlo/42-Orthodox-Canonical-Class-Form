@@ -36,9 +36,9 @@ for i in $@; do
 	echo "" >>$i.hpp
 	echo "class $i {" >>$i.hpp
 	echo "  public:" >>$i.hpp
-	echo "    ~$i(void);" >>$i.hpp
 	echo "    $i(void);" >>$i.hpp
 	echo "    $i($i const &other);" >>$i.hpp
+	echo "    ~$i(void);" >>$i.hpp
 	echo "    $i &operator=($i const &other);" >>$i.hpp
 	echo "};" >>$i.hpp
 	echo "" >>$i.hpp
