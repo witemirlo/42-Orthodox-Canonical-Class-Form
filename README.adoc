@@ -1,0 +1,28 @@
+= 42-Orthodox-Canonical-Class-Form
+A shell sript to create classes in the orthodox cannonical class form for the cpp projects in 42 School
+
+== Installation
+.Clone the repository
+[source, sh]
+....
+git clone https://github.com/witemirlo/42-Orthodox-Canonical-Class-Form.git $HOME/.orthodox-canonical-class-form
+....
+
+.Bash
+[source, sh]
+....
+echo "export PATH=$PATH:$HOME/.orthodox-canonical-class-form" >> .bashrc
+....
+
+.Zsh
+[source, sh]
+....
+echo "export PATH=$PATH:$HOME/.orthodox-canonical-class-form" >> .zshrc
+....
+
+== Usage
+[source, sh]
+....
+class NAME_OF_THE_CLASS
+....
+This generates a .cpp and a .hpp files with the given NAME_OF_THE_CLASS with a default constructor, a default destructor, a default copy constructor, an assigment operator
