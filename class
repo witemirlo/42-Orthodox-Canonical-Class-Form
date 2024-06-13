@@ -1,46 +1,47 @@
 #! /bin/sh
 
-for i in $@; do
+for ARG in $@; do
 
-	echo "#include \"$i.hpp\"" >$i.cpp
-	echo "#include <iostream>" >>$i.cpp
-	echo "" >>$i.cpp
-	echo "// CONSTRUCTORS AND DESTRUCTORS-------------------------------------------------" >>$i.cpp
-	echo "$i::$i(void) {" >>$i.cpp
-	echo "    std::cout << "$i default constructor called" << std::endl;" >>$i.cpp
-	echo "}" >>$i.cpp
-	echo "" >>$i.cpp
-	echo "$i::$i($i const &other) {" >>$i.cpp
-	echo "    *this = other;" >>$i.cpp
-	echo "    std::cout << "$i copy constructor called" << std::endl;" >>$i.cpp
-	echo "}" >>$i.cpp
-	echo "" >>$i.cpp
-	echo "$i::~$i(void) {" >>$i.cpp
-	echo "    std::cout << "$i destructor called" << std::endl;" >>$i.cpp
-	echo "}" >>$i.cpp
-	echo "" >>$i.cpp
-	echo "// OPERATORS--------------------------------------------------------------------" >>$i.cpp
-	echo "$i &$i::operator=($i const &other) {" >>$i.cpp
-	echo "    if (this != &other){" >>$i.cpp
-	echo "        // DO THINGS" >>$i.cpp
-	echo "    }" >>$i.cpp
-	echo "    return (*this);" >>$i.cpp
-	echo "}" >>$i.cpp
-	echo "" >>$i.cpp
-	echo "// METHODS AND MEMBER FUNCTIONS-------------------------------------------------" >>$i.cpp
+	echo "#include \"$ARG.hpp\"" >$ARG.cpp
+	echo "#include <iostream>" >>$ARG.cpp
+	echo "" >>$ARG.cpp
+	echo "// CONSTRUCTORS AND DESTRUCTORS-------------------------------------------------" >>$ARG.cpp
+	echo "$ARG::$ARG(void) {" >>$ARG.cpp
+	echo "    std::cout << \"$ARG default constructor called\" << std::endl;" >>$ARG.cpp
+	echo "}" >>$ARG.cpp
+	echo "" >>$ARG.cpp
+	echo "$ARG::$ARG($ARG const &other) {" >>$ARG.cpp
+	echo "    std::cout << \"$ARG copy constructor called\" << std::endl;" >>$ARG.cpp
+	echo "    *this = other;" >>$ARG.cpp
+	echo "}" >>$ARG.cpp
+	echo "" >>$ARG.cpp
+	echo "$ARG::~$ARG(void) {" >>$ARG.cpp
+	echo "    std::cout << \"$ARG destructor called\" << std::endl;" >>$ARG.cpp
+	echo "}" >>$ARG.cpp
+	echo "" >>$ARG.cpp
+	echo "// OPERATORS--------------------------------------------------------------------" >>$ARG.cpp
+	echo "$ARG &$ARG::operator=($ARG const &other) {" >>$ARG.cpp
+	echo "    if (this != &other){" >>$ARG.cpp
+	echo "        // DO THINGS" >>$ARG.cpp
+	echo "    }" >>$ARG.cpp
+	echo "    return (*this);" >>$ARG.cpp
+	echo "}" >>$ARG.cpp
+	echo "" >>$ARG.cpp
+	echo "// METHODS AND MEMBER FUNCTIONS-------------------------------------------------" >>$ARG.cpp
 
-	UPPERCASE=$(echo $i | tr a-z A-Z)
-	echo "#ifndef _${UPPERCASE}_HPP" >$i.hpp
-	echo "#define _${UPPERCASE}_HPP" >>$i.hpp
-	echo "" >>$i.hpp
-	echo "class $i {" >>$i.hpp
-	echo "  public:" >>$i.hpp
-	echo "    $i(void);" >>$i.hpp
-	echo "    $i($i const &other);" >>$i.hpp
-	echo "    ~$i(void);" >>$i.hpp
-	echo "    $i &operator=($i const &other);" >>$i.hpp
-	echo "};" >>$i.hpp
-	echo "" >>$i.hpp
-	echo "#endif // !_${UPPERCASE}_HPP" >>$i.hpp
+	UPPERCASE=$(echo $ARG | tr a-z A-Z)
+	echo "#ifndef _${UPPERCASE}_HPP" >$ARG.hpp
+	echo "#define _${UPPERCASE}_HPP" >>$ARG.hpp
+	echo "" >>$ARG.hpp
+	echo "class $ARG {" >>$ARG.hpp
+	echo "  public:" >>$ARG.hpp
+	echo "    $ARG(void);" >>$ARG.hpp
+	echo "    $ARG($ARG const &other);" >>$ARG.hpp
+	echo "    ~$ARG(void);" >>$ARG.hpp
+	echo "" >>$ARG.hpp
+	echo "    $ARG &operator=($ARG const &other);" >>$ARG.hpp
+	echo "};" >>$ARG.hpp
+	echo "" >>$ARG.hpp
+	echo "#endif // !_${UPPERCASE}_HPP" >>$ARG.hpp
 
 done
