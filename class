@@ -1,0 +1,47 @@
+#! /bin/sh
+
+for i in $@; do
+
+	echo "#include \"$i.hpp\"" >$i.cpp
+	echo "#include <iostream>" >>$i.cpp
+	echo "" >>$i.cpp
+	echo "// CONSTRUCTORS AND DESTRUCTORS-------------------------------------------------" >>$i.cpp
+	echo "$i::$i(void) {" >>$i.cpp
+	echo "    std::cout << "$i default constructor called" << std::endl;" >>$i.cpp
+	echo "}" >>$i.cpp
+	echo "" >>$i.cpp
+	echo "$i::$i($i const &other) {" >>$i.cpp
+	echo "    *this = other;" >>$i.cpp
+	echo "    std::cout << "$i copy constructor called" << std::endl;" >>$i.cpp
+	echo "}" >>$i.cpp
+	echo "" >>$i.cpp
+	echo "$i::~$i(void) {" >>$i.cpp
+	echo "    std::cout << "$i destructor called" << std::endl;" >>$i.cpp
+	echo "}" >>$i.cpp
+	echo "" >>$i.cpp
+	echo "// OPERATORS--------------------------------------------------------------------" >>$i.cpp
+	echo "$i &$i::operator=($i const &other) {" >>$i.cpp
+	echo "    if (this != &other){" >>$i.cpp
+	echo "        // DO THINGS" >>$i.cpp
+	echo "    }" >>$i.cpp
+	echo "    return (*this);" >>$i.cpp
+	echo "}" >>$i.cpp
+	echo "" >>$i.cpp
+	echo "// METHODS----------------------------------------------------------------------" >>$i.cpp
+
+	#declare -u UPPERCASE=$i
+	UPPERCASE=$(echo $i | tr a-z A-Z)
+	echo "#ifndef _${UPPERCASE}_HPP" >$i.hpp
+	echo "#define _${UPPERCASE}_HPP" >>$i.hpp
+	echo "" >>$i.hpp
+	echo "class $i {" >>$i.hpp
+	echo "  public:" >>$i.hpp
+	echo "    ~$i(void);" >>$i.hpp
+	echo "    $i(void);" >>$i.hpp
+	echo "    $i($i const &other);" >>$i.hpp
+	echo "    $i &operator=($i const &other);" >>$i.hpp
+	echo "};" >>$i.hpp
+	echo "" >>$i.hpp
+	echo "#endif // !_${UPPERCASE}_HPP" >>$i.hpp
+
+done
