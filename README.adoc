@@ -1,4 +1,4 @@
-= 42-Orthodox-Canonical-Class-Form
+= 42 Orthodox Canonical Class Form
 
 A shell sript to create classes in the orthodox cannonical class form for the cpp projects in 42 School
 
