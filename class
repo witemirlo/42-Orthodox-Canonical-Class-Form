@@ -29,7 +29,6 @@ for i in $@; do
 	echo "" >>$i.cpp
 	echo "// METHODS AND MEMBER FUNCTIONS-------------------------------------------------" >>$i.cpp
 
-	#declare -u UPPERCASE=$i
 	UPPERCASE=$(echo $i | tr a-z A-Z)
 	echo "#ifndef _${UPPERCASE}_HPP" >$i.hpp
 	echo "#define _${UPPERCASE}_HPP" >>$i.hpp
