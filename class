@@ -2,30 +2,30 @@
 
 # CPP --------------------------------------------------------------------------
 cpp() {
-    local class=$1
-    local uppercase_name=$(echo $class | tr a-z A-Z)
+    local CLASS=$1
+    local UPPERCASE=$(echo $CLASS | tr a-z A-Z)
 
-    cat <<EOF > ${class}.cpp
-#include "${class}.hpp"
-#include <iostream>
+    cat <<EOF > ${CLASS}.cpp
+#include "${CLASS}.hpp"
 #include "colors.hpp"
+#include <iostream>
 
 // CONSTRUCTORS AND DESTRUCTORS-------------------------------------------------
-${class}::${class}(void) {
-    std::cout << GREEN "${class} default constructor called" NC << std::endl;
+${CLASS}::${CLASS}(void) {
+    std::cout << GREEN "${CLASS} default constructor called" NC << std::endl;
 }
 
-${class}::${class}(const ${class} &other) {
-    std::cout << GREEN "${class} copy constructor called" NC << std::endl;
+${CLASS}::${CLASS}(${CLASS} const &other) {
+    std::cout << GREEN "${CLASS} copy constructor called" NC << std::endl;
     *this = other;
 }
 
-${class}::~${class}(void) {
-    std::cout << RED "${class} destructor called" NC << std::endl;
+${CLASS}::~${CLASS}(void) {
+    std::cout << RED "${CLASS} destructor called" NC << std::endl;
 }
 
 // OPERATORS--------------------------------------------------------------------
-${class} &${class}::operator=(const ${class} &other) {
+${CLASS} &${CLASS}::operator=(${CLASS} const &other) {
     if (this != &other){
         // DO THINGS
     }
@@ -38,23 +38,23 @@ EOF
 
 # HPP --------------------------------------------------------------------------
 hpp() {
-    local class=$1
-    local uppercase_name=$(echo $class | tr a-z A-Z)
+    local CLASS=$1
+    local UPPERCASE=$(echo $CLASS | tr a-z A-Z)
 
-    cat <<EOF > ${class}.hpp
-#ifndef _${uppercase_name}_HPP
-#define _${uppercase_name}_HPP
+    cat <<EOF > ${CLASS}.hpp
+#ifndef _${UPPERCASE}_HPP
+#define _${UPPERCASE}_HPP
 
-class ${class} {
+class ${CLASS} {
   public:
-    ${class}(void);
-    ${class}(const ${class} &other);
-    ~${class}(void);
+    ${CLASS}(void);
+    ${CLASS}(${CLASS} const &other);
+    ~${CLASS}(void);
 
-    ${class} &operator=(const ${class} &other);
+    ${CLASS} &operator=(${CLASS} const &other);
 };
 
-#endif // _${uppercase_name}_HPP
+#endif // _${UPPERCASE}_HPP
 EOF
 }
 
@@ -80,9 +80,9 @@ EOF
 
 # MAIN -------------------------------------------------------------------------
 main() {
-    for class in "$@"; do
-        cpp $class
-        hpp $class
+    for CLASS in "$@"; do
+        cpp $CLASS
+        hpp $CLASS
     done
 
     colors
