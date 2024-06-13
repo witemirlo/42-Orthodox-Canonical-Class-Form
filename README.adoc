@@ -27,3 +27,9 @@ echo "export PATH=$PATH:$HOME/.orthodox-canonical-class-form" >> .zshrc
 class NAME_OF_THE_CLASS
 ....
 This generates a .cpp and a .hpp files with the given NAME_OF_THE_CLASS with a default constructor, a default destructor, a default copy constructor and an assigment operator
+
+.You can make as many classes as you want just listing them
+[source, sh]
+....
+class NAME1 NAME2 NAME3 NAME4
+....
