@@ -27,7 +27,7 @@ for i in $@; do
 	echo "    return (*this);" >>$i.cpp
 	echo "}" >>$i.cpp
 	echo "" >>$i.cpp
-	echo "// METHODS----------------------------------------------------------------------" >>$i.cpp
+	echo "// METHODS AND MEMBER FUNCTIONS-------------------------------------------------" >>$i.cpp
 
 	#declare -u UPPERCASE=$i
 	UPPERCASE=$(echo $i | tr a-z A-Z)
