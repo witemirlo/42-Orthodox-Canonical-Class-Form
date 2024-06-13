@@ -1,6 +1,6 @@
 = 42 Orthodox Canonical Class Form
 
-A shell sript to create classes in the orthodox cannonical class form for the cpp projects in 42 School
+A shell script to create classes in the orthodox cannonical class form for the cpp projects in 42 School
 
 == Installation
 .Clone the repository
