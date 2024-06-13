@@ -1,63 +1,91 @@
 #! /bin/sh
 
-for ARG in $@; do
+# CPP --------------------------------------------------------------------------
+cpp() {
+    local class=$1
+    local uppercase_name=$(echo $class | tr a-z A-Z)
 
-	echo "#include \"$ARG.hpp\"" >$ARG.cpp
-	echo "#include <iostream>" >>$ARG.cpp
-	echo "#include \"colors.hpp\"" >>$ARG.cpp
-	echo "" >>$ARG.cpp
-	echo "// CONSTRUCTORS AND DESTRUCTORS-------------------------------------------------" >>$ARG.cpp
-	echo "$ARG::$ARG(void) {" >>$ARG.cpp
-	echo "    std::cout << GREEN \"$ARG default constructor called\" NC << std::endl;" >>$ARG.cpp
-	echo "}" >>$ARG.cpp
-	echo "" >>$ARG.cpp
-	echo "$ARG::$ARG($ARG const &other) {" >>$ARG.cpp
-	echo "    std::cout << GREEN \"$ARG copy constructor called\" NC << std::endl;" >>$ARG.cpp
-	echo "    *this = other;" >>$ARG.cpp
-	echo "}" >>$ARG.cpp
-	echo "" >>$ARG.cpp
-	echo "$ARG::~$ARG(void) {" >>$ARG.cpp
-	echo "    std::cout << RED \"$ARG destructor called\" NC << std::endl;" >>$ARG.cpp
-	echo "}" >>$ARG.cpp
-	echo "" >>$ARG.cpp
-	echo "// OPERATORS--------------------------------------------------------------------" >>$ARG.cpp
-	echo "$ARG &$ARG::operator=($ARG const &other) {" >>$ARG.cpp
-	echo "    if (this != &other){" >>$ARG.cpp
-	echo "        // DO THINGS" >>$ARG.cpp
-	echo "    }" >>$ARG.cpp
-	echo "    return (*this);" >>$ARG.cpp
-	echo "}" >>$ARG.cpp
-	echo "" >>$ARG.cpp
-	echo "// METHODS AND MEMBER FUNCTIONS-------------------------------------------------" >>$ARG.cpp
+    cat <<EOF > ${class}.cpp
+#include "${class}.hpp"
+#include <iostream>
+#include "colors.hpp"
 
-	UPPERCASE=$(echo $ARG | tr a-z A-Z)
-	echo "#ifndef _${UPPERCASE}_HPP" >$ARG.hpp
-	echo "#define _${UPPERCASE}_HPP" >>$ARG.hpp
-	echo "" >>$ARG.hpp
-	echo "class $ARG {" >>$ARG.hpp
-	echo "  public:" >>$ARG.hpp
-	echo "    $ARG(void);" >>$ARG.hpp
-	echo "    $ARG($ARG const &other);" >>$ARG.hpp
-	echo "    ~$ARG(void);" >>$ARG.hpp
-	echo "" >>$ARG.hpp
-	echo "    $ARG &operator=($ARG const &other);" >>$ARG.hpp
-	echo "};" >>$ARG.hpp
-	echo "" >>$ARG.hpp
-	echo "#endif // !_${UPPERCASE}_HPP" >>$ARG.hpp
+// CONSTRUCTORS AND DESTRUCTORS-------------------------------------------------
+${class}::${class}(void) {
+    std::cout << GREEN "${class} default constructor called" NC << std::endl;
+}
 
-	echo "#ifndef _COLORS_HPP" > colors.hpp
-	echo "#define _COLORS_HPP" >> colors.hpp
-	echo "" >> colors.hpp
-	echo "#define BLACK \"\033[1;30m\"" >> colors.hpp
-	echo "#define RED \"\033[1;31m\"" >> colors.hpp
-	echo "#define GREEN \"\033[1;32m\"" >> colors.hpp
-	echo "#define YELLOW \"\033[1;33m\"" >> colors.hpp
-	echo "#define BLUE \"\033[1;34m\"" >> colors.hpp
-	echo "#define MAGENTA \"\033[1;35m\"" >> colors.hpp
-	echo "#define CYAN \"\033[1;36m\"" >> colors.hpp
-	echo "#define WHITE \"\033[1;37m\"" >> colors.hpp
-	echo "#define NC \"\033[0m\"" >> colors.hpp
-	echo "" >> colors.hpp
-	echo "#endif // !_COLORS_HPP" >> colors.hpp
+${class}::${class}(const ${class} &other) {
+    std::cout << GREEN "${class} copy constructor called" NC << std::endl;
+    *this = other;
+}
 
-done
+${class}::~${class}(void) {
+    std::cout << RED "${class} destructor called" NC << std::endl;
+}
+
+// OPERATORS--------------------------------------------------------------------
+${class} &${class}::operator=(const ${class} &other) {
+    if (this != &other){
+        // DO THINGS
+    }
+    return (*this);
+}
+
+// METHODS AND MEMBER FUNCTIONS-------------------------------------------------
+EOF
+}
+
+# HPP --------------------------------------------------------------------------
+hpp() {
+    local class=$1
+    local uppercase_name=$(echo $class | tr a-z A-Z)
+
+    cat <<EOF > ${class}.hpp
+#ifndef _${uppercase_name}_HPP
+#define _${uppercase_name}_HPP
+
+class ${class} {
+  public:
+    ${class}(void);
+    ${class}(const ${class} &other);
+    ~${class}(void);
+
+    ${class} &operator=(const ${class} &other);
+};
+
+#endif // _${uppercase_name}_HPP
+EOF
+}
+
+# COLORS -----------------------------------------------------------------------
+colors() {
+    cat <<EOF > colors.hpp
+#ifndef _COLORS_HPP
+#define _COLORS_HPP
+
+#define BLACK "\033[1;30m"
+#define RED "\033[1;31m"
+#define GREEN "\033[1;32m"
+#define YELLOW "\033[1;33m"
+#define BLUE "\033[1;34m"
+#define MAGENTA "\033[1;35m"
+#define CYAN "\033[1;36m"
+#define WHITE "\033[1;37m"
+#define NC "\033[0m"
+
+#endif // !_COLORS_HPP
+EOF
+}
+
+################################################################################
+main() {
+    for class in "$@"; do
+        cpp $class
+        hpp $class
+    done
+
+    colors
+}
+
+main "$@"
