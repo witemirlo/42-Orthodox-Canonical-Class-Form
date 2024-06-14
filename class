@@ -2,12 +2,13 @@
 
 # CPP --------------------------------------------------------------------------
 cpp() {
+    # VARIABLES ----------------------------------------------------------------
     local CLASS=$1
     local UPPERCASE=$(echo $CLASS | tr a-z A-Z)
 
+    # CLASS DEFINITION ---------------------------------------------------------
     cat <<EOF > ${CLASS}.cpp
 #include "${CLASS}.hpp"
-#include "colors.hpp"
 #include <iostream>
 
 // CONSTRUCTORS AND DESTRUCTORS-------------------------------------------------
@@ -38,10 +39,33 @@ EOF
 
 # HPP --------------------------------------------------------------------------
 hpp() {
+    # VARIABLES ----------------------------------------------------------------
     local CLASS=$1
     local UPPERCASE=$(echo $CLASS | tr a-z A-Z)
 
+    # COLORS -------------------------------------------------------------------
     cat <<EOF > ${CLASS}.hpp
+#ifndef _COLORS
+#define _COLORS
+
+#define BLACK "\033[1;30m"
+#define RED "\033[1;31m"
+#define GREEN "\033[1;32m"
+#define YELLOW "\033[1;33m"
+#define BLUE "\033[1;34m"
+#define MAGENTA "\033[1;35m"
+#define CYAN "\033[1;36m"
+#define WHITE "\033[1;37m"
+#define NC "\033[0m"
+
+#endif // !_COLORS
+
+// ${CLASS} declaration --------------------------------------------------------
+
+EOF
+
+    # CLASS DECLARATION --------------------------------------------------------
+    cat <<EOF >> ${CLASS}.hpp
 #ifndef _${UPPERCASE}_HPP
 #define _${UPPERCASE}_HPP
 
@@ -54,27 +78,7 @@ class ${CLASS} {
     ${CLASS} &operator=(${CLASS} const &other);
 };
 
-#endif // _${UPPERCASE}_HPP
-EOF
-}
-
-# COLORS -----------------------------------------------------------------------
-colors() {
-    cat <<EOF > colors.hpp
-#ifndef _COLORS_HPP
-#define _COLORS_HPP
-
-#define BLACK "\033[1;30m"
-#define RED "\033[1;31m"
-#define GREEN "\033[1;32m"
-#define YELLOW "\033[1;33m"
-#define BLUE "\033[1;34m"
-#define MAGENTA "\033[1;35m"
-#define CYAN "\033[1;36m"
-#define WHITE "\033[1;37m"
-#define NC "\033[0m"
-
-#endif // !_COLORS_HPP
+#endif // !_${UPPERCASE}_HPP
 EOF
 }
 
@@ -84,8 +88,6 @@ main() {
         cpp $CLASS
         hpp $CLASS
     done
-
-    colors
 }
 
 main "$@"
