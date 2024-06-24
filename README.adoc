@@ -23,13 +23,13 @@ chmod +x class
 .Bash
 [source, sh]
 ....
-echo "export PATH=$PATH:$HOME/.orthodox-canonical-class-form" >> .bashrc
+echo 'export PATH=$PATH:$HOME/.orthodox-canonical-class-form' >> $HOME/.bashrc
 ....
 
 .Zsh
 [source, sh]
 ....
-echo "export PATH=$PATH:$HOME/.orthodox-canonical-class-form" >> .zshrc
+echo 'export PATH=$PATH:$HOME/.orthodox-canonical-class-form' >> $HOME/.zshrc
 ....
 
 .Fish
