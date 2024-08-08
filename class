@@ -12,22 +12,26 @@ cpp() {
 #include <iostream>
 
 // CONSTRUCTORS AND DESTRUCTORS-------------------------------------------------
-${CLASS}::${CLASS}(void) {
+${CLASS}::${CLASS}(void)
+{
     std::cout << GREEN "${CLASS} default constructor called" NC << std::endl;
 }
 
-${CLASS}::${CLASS}(${CLASS} const &other) {
+${CLASS}::${CLASS}(${CLASS} const& other)
+{
     std::cout << GREEN "${CLASS} copy constructor called" NC << std::endl;
     *this = other;
 }
 
-${CLASS}::~${CLASS}(void) {
+${CLASS}::~${CLASS}(void)
+{
     std::cout << RED "${CLASS} destructor called" NC << std::endl;
 }
 
 // OPERATORS--------------------------------------------------------------------
-${CLASS} &${CLASS}::operator=(${CLASS} const &other) {
-    if (this == &other){
+${CLASS}& ${CLASS}::operator=(${CLASS} const& other)
+{
+    if (this == &other) {
         return (*this);
     }
     // DO THINGS
@@ -63,23 +67,20 @@ hpp() {
 
 // ${CLASS} declaration --------------------------------------------------------
 
-EOF
-
-	# CLASS DECLARATION --------------------------------------------------------
-	cat <<EOF >>${CLASS}.hpp
-#ifndef _${UPPERCASE}_HPP
-#define _${UPPERCASE}_HPP
+#ifndef _${CLASS}_HPP
+#define _${CLASS}_HPP
 
 class ${CLASS} {
-  public:
+public:
     ${CLASS}(void);
-    ${CLASS}(${CLASS} const &other);
+    ${CLASS}(${CLASS} const& other);
     ~${CLASS}(void);
 
-    ${CLASS} &operator=(${CLASS} const &other);
+    ${CLASS}& operator=(${CLASS} const& other);
 };
 
-#endif // !_${UPPERCASE}_HPP
+#endif // !_${CLASS}_HPP
+
 EOF
 }
 
