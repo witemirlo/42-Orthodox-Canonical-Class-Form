@@ -67,8 +67,8 @@ hpp() {
 
 // ${CLASS} declaration --------------------------------------------------------
 
-#ifndef _${CLASS}_HPP
-#define _${CLASS}_HPP
+#ifndef _${UPPERCASE}_HPP
+#define _${UPPERCASE}_HPP
 
 class ${CLASS} {
 public:
@@ -79,7 +79,7 @@ public:
     ${CLASS}& operator=(${CLASS} const& other);
 };
 
-#endif // !_${CLASS}_HPP
+#endif // !_${UPPERCASE}_HPP
 
 EOF
 }
