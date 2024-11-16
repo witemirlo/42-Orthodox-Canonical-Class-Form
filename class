@@ -9,28 +9,28 @@ cpp() {
 // CONSTRUCTORS AND DESTRUCTORS-------------------------------------------------
 ${CLASS}::${CLASS}(void)
 {
-    std::cout << GREEN "${CLASS} default constructor called" NC << std::endl;
+	std::cout << GREEN "${CLASS} default constructor called" NC << std::endl;
 }
 
 ${CLASS}::${CLASS}(${CLASS} const& other)
 {
-    std::cout << GREEN "${CLASS} copy constructor called" NC << std::endl;
-    *this = other;
+	std::cout << GREEN "${CLASS} copy constructor called" NC << std::endl;
+	*this = other;
 }
 
 ${CLASS}::~${CLASS}(void)
 {
-    std::cout << RED "${CLASS} destructor called" NC << std::endl;
+	std::cout << RED "${CLASS} destructor called" NC << std::endl;
 }
 
 // OPERATORS--------------------------------------------------------------------
 ${CLASS}& ${CLASS}::operator=(${CLASS} const& other)
 {
-    if (this == &other) {
-        return (*this);
-    }
-    // DO THINGS
-    return (*this);
+	if (this == &other) {
+		return *this;
+	}
+	// DO THINGS
+	return *this;
 }
 
 // METHODS AND MEMBER FUNCTIONS-------------------------------------------------
@@ -41,34 +41,32 @@ EOF
 hpp() {
 	cat <<EOF >"${CLASS}.hpp"
 #ifndef _COLORS
-#define _COLORS
+# define _COLORS
 
-// clang-format off
-#define BLACK   "\033[1;30m"
-#define RED     "\033[1;31m"
-#define GREEN   "\033[1;32m"
-#define YELLOW  "\033[1;33m"
-#define BLUE    "\033[1;34m"
-#define MAGENTA "\033[1;35m"
-#define CYAN    "\033[1;36m"
-#define WHITE   "\033[1;37m"
-#define NC      "\033[0m"
-// clang-format on
+# define BLACK   "\033[1;30m"
+# define RED     "\033[1;31m"
+# define GREEN   "\033[1;32m"
+# define YELLOW  "\033[1;33m"
+# define BLUE    "\033[1;34m"
+# define MAGENTA "\033[1;35m"
+# define CYAN    "\033[1;36m"
+# define WHITE   "\033[1;37m"
+# define NC      "\033[0m"
 
 #endif // !_COLORS
 
 // ${CLASS} declaration --------------------------------------------------------
 
 #ifndef _${UPPERCASE}_HPP
-#define _${UPPERCASE}_HPP
+# define _${UPPERCASE}_HPP
 
 class ${CLASS} {
 public:
-    ${CLASS}(void);
-    ${CLASS}(${CLASS} const& other);
-    ~${CLASS}(void);
+	${CLASS}(void);
+	${CLASS}(${CLASS} const& other);
+	~${CLASS}(void);
 
-    ${CLASS}& operator=(${CLASS} const& other);
+	${CLASS}& operator=(${CLASS} const& other);
 };
 
 #endif // !_${UPPERCASE}_HPP
